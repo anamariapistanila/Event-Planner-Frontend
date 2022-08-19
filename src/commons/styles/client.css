@@ -1,0 +1,14 @@
+.Client {
+    width: 100%;
+    height: 701px;
+    background: linear-gradient(90deg, rgba(46,45,45,1) 6%, rgba(76,78,78,0.9615196420365021) 40%, rgba(89,88,88,1) 68%, rgba(133,130,130,1) 92%);
+
+}
+
+.buttons {
+    width: 1500px;
+}
+
+.tables{
+    width: 1500px;
+}

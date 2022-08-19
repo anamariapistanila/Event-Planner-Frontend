@@ -1,0 +1,12 @@
+.motto{
+    font-size: 65px;
+    position: absolute;
+    left: 550px;
+    top: 300px;
+    font-family: "Charcoal1", serif;
+}
+
+@font-face {
+    font-family: 'Charcoal1';
+    src: url("../fonts/montserrat/Montserrat-LightItalic.ttf") format("truetype");
+}

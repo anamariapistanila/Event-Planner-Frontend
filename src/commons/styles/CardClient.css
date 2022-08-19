@@ -1,0 +1,79 @@
+.CardClient{
+    width: 380px;
+    height:500px;
+    background: white;
+    border-radius:10px;
+    box-shadow:0px 1px 10px 1px black;
+    overflow:hidden;
+}
+
+.upper-container{
+    height:100px;
+    background: linear-gradient(to left, #595858, #ede6d6);
+}
+
+.image-container1 img{
+    background: white;
+    width: 140px;
+    height:150px;
+    border-radius:50%;
+    padding:6px;
+    transform: translate(130px,15px);
+
+
+}
+img {
+    border: 2px solid #ede6d6;
+
+}
+.lower-container{
+    height: 300px;
+    background: white;
+    text-align:center;
+    margin-top:60px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.lower-container h6{
+    margin:1.2rem;
+    font-family: sans-serif;
+    color: #10030a;
+    font-size:1rem;
+    text-align:justify;
+
+}
+.lower-container h2 {
+    color: #10030a;
+    font-weight: 600;
+    font-size: 1.5rem;
+
+}
+.lower-container h5{
+    color: rgb(16, 3, 10);
+    font-weight:700;
+    font-size:1.2rem;
+}
+.lower-container p{
+    margin:1rem;
+    font-family: sans-serif;
+    color: #10030a;
+    font-size:0.9rem;
+    text-align:justify;
+}
+
+button {
+    margin: 0 1rem 1rem;
+    color: #ede6d6;
+    background-color: white;
+    border: 2px solid #ede6d6;
+    padding: 0.6rem;
+    border-radius: 6px;
+    transition-duration: 0.5s;
+    animation: ease-in-out;
+}
+
+button:hover{
+
+    transform:scale(1.2);
+    border:none;
+    color:white;}
