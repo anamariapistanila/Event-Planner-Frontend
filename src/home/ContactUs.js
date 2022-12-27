@@ -14,6 +14,8 @@ const backgroundStyle = {
     backgroundImage: `url(${Background})`,
 };
 export default function ContactUs() {
+
+
     const form = useRef();
     let user_id="lGbr7K6WoG4ScOobv";
     emailjs.init(user_id);
@@ -37,6 +39,7 @@ export default function ContactUs() {
             <div>
                 <h5 style={{color: 'rgb(16,3,10)', width:'60%',height:'10%', padding:'5px 100px',position:'relative',top:'20%',align : 'center'}}> Cluj-Napoca , Str. Alexandru Vaida Voevod</h5>
                 <h5 style={{color: 'rgb(16,3,10)', width:'60%',height:'10%', padding:'5px 100px',position:'relative',top:'20%'}}> 0754584520</h5>
+                <h5 style={{color: 'rgb(16,3,10)', width:'60%',height:'10%', padding:'5px 100px',position:'relative',top:'20%'}}> Contact: anamaria_pistanila@yahoo.com</h5>
             </div>
             <div className="container-login100" style={backgroundStyle}>
                 <div className="wrap-login100">
@@ -59,7 +62,12 @@ export default function ContactUs() {
 
                         <div className="wrap-input100 validate-input" >
                             <Label> Email Address: </Label>
-                            <input className="input100" type="text" name="email_address" placeholder="Email Address" />
+                            {/*<input className="input100" type="text" name="email_address" placeholder="Email Address" />*/}
+                            <input className="input100"  defaultValue={"anamaria_pistanila@yahoo.com"}
+                                   type="text"
+                                   name="email_address"
+                                   id="email_address"
+                            />
                             <span className="focus-input100"/>
                             <span className="symbol-inputContactUs">
 							            <i className="fa fa-envelope-o" aria-hidden="true"/>

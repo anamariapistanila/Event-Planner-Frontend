@@ -30,6 +30,8 @@ function performRequestRegister(request, callback){
             callback(null, 1, err)
         });
 }
+
+
 function performRequestLogin(request, callback){
     fetch(request)
         .then(

@@ -1,3 +1,4 @@
+
 li {
     list-style: none;
 }
@@ -5,14 +6,17 @@ li {
 .events-container {
     display: flex;
     flex-direction: column;
+
+
 }
 
 .event-list {
     display: flex;
     flex-direction: row;
+
+    /*align-content: center;*/
     flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .event {
@@ -21,7 +25,9 @@ li {
     padding: 10px;
     border: 1px solid #ede6d6;
     border-radius: 5px;
-    background-color: #ede6d6;
+
+    height: 500px;
+
 }
 
 .event img {

@@ -18,22 +18,52 @@ function AdminPlanners() {
 
 
     const [planners, setPlanners] = useState([]);
-
+    const [events, setEvents] = useState([]);
+    const [ourWork, setOurWork] = useState([]);
+    let event=0;
+    let ourWork1=0;
     const [show, setShow] = useState(false);
     const handleDelete = () => setShow(true);
     const handleClose = () => setShow(false);
     const [mainPlanners, setMainPlanners] = useState([]);
-    useEffect(() => {
-        axios.get('http://localhost:8080/admin/allPlanners').then(res => {
-
-            setPlanners(res.data);
-            setMainPlanners(res.data);
-            console.log(res.data);
-        }).catch(err => {
-            console.log(err);
-        })
+    useEffect(() => {const fetching = async () => {
+        const {data} =await
+        axios.get('http://localhost:8080/admin/allPlanners',{ headers: {
+                'Authorization': localStorage.getItem('token')
+            }     })
+            setPlanners(data);
+            setMainPlanners(data);
+            console.log(data);
+    }
+        fetching();
     }, []);
 
+    useEffect(() => {
+        const fetching = async () => {
+            const {data} = await axios.get('http://localhost:8080/client/allEvents', {
+                headers: {
+                    'Authorization': localStorage.getItem('token')
+                }     })
+
+            setEvents(data);
+            console.log(localStorage.getItem('token'));
+            console.log(data);
+
+
+        }
+        fetching();
+
+
+    }, []);
+    useEffect(() => {
+        const fetching = async () => {
+            const {data} = await axios.get('http://localhost:8080/ourWork/getOurWork');
+            setOurWork(data);
+            console.log(data);
+        }
+        fetching();
+
+    }, []);
     const handleSearchByName = (e) => {
         setPlanners(mainPlanners.filter(u => u.name.toLowerCase()
             .includes(e.target.value.toLowerCase())
@@ -53,8 +83,26 @@ function AdminPlanners() {
         fetchPlanners();
     }
     function deletePlanner(planner){
+        {ourWork.map((o=>{
+            if(o.id_planner!=null){
+                ourWork1=1;
+            }
+        }))}
+        {events.map((e=>{
+            if(e.id_planner!=null){
+                event=1;
+                console.log(event);
+            }
+        }))}
+        if(event==1 || ourWork1==1){
+            alert("The planner still have events");
+            window.location.reload(false);
+        }
+       else{
+           console.log(event);
+           console.log(planner);
         API_ADMIN.deletePlannerById(planner,(result, status, err) => reloadAfterDelete());
-        alert("Deleted successfully");
+        alert("Deleted successfully");}
     }
 
 
@@ -79,8 +127,9 @@ function AdminPlanners() {
                         <th scope="col">Name of Planner</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Type of planner</th>
                         <th scope="col"></th>
+                        <th scope="col">Type of planner</th>
+
                         <th scope="col">Delete</th>
                         <th scope="col">Update</th>
 

@@ -19,7 +19,8 @@ const backgroundStyle = {
 };
 function ClientsPlannerTable() {
 
-
+    const id=[];
+    let nr=0;
     const [clients, setClients] = useState([]);
     const [notif, setNotif] = useState(false);
     const [show, setShow] = useState(false);
@@ -41,7 +42,11 @@ function ClientsPlannerTable() {
             fetching();
     }, []);
 
-
+    {clients.map((u=>{
+        nr++;
+    console.log(nr);
+    id.push(nr);
+}))};
     const handleSearchByName = (e) => {
         setClients(mainClients.filter(u => u.name.toLowerCase()
             .includes(e.target.value.toLowerCase())
@@ -119,7 +124,8 @@ function ClientsPlannerTable() {
                     </thead>
                     <tbody>
                     {clients.map(u =>
-                        <tr key={u.id}>
+
+                        <tr key={u.id} >
 
                             <th scope="row">{u.name}</th>
 
@@ -136,6 +142,7 @@ function ClientsPlannerTable() {
                                         </Modal.Header>
                                         <Modal.Body>Are you sure you want to delete?</Modal.Body>
                                         <Modal.Footer>
+
                                             <Button variant="secondary" onClick={()=>deleteClient(u.id)}>
                                                 Yes
                                             </Button>

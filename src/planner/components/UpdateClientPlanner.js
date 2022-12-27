@@ -3,11 +3,11 @@ import React, {useEffect, useState} from 'react';
 import { useLocation } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { Label} from "reactstrap";
-import {Col, FormGroup, Row} from "react-bootstrap";
+import {Col,  Row} from "react-bootstrap";
 import * as API_USERS from "../api/planner-api";
 
 import Background from "../../commons/images/background4.jpg";
-import axios from "axios";
+
 
 const backgroundStyle = {
     backgroundPosition: 'center',
@@ -85,7 +85,8 @@ function UpdateClientPlanner() {
         let clientDTO = {
             email: document.getElementById("emailClient").value,
             phone:document.getElementById("phoneClient").value,
-            address:document.getElementById("addressClient").value
+            address:document.getElementById("addressClient").value,
+            birthdate: state.clients.birthdate
 
 
         };

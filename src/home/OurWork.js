@@ -9,10 +9,17 @@ const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     width: "100%",
-    height: "992px",
+    height: "1100px",
     backgroundImage: `url(${Background})`,
 };
-
+const backgroundImage ={
+    backgroundImage: `url(${Background})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    width: "100%",
+    height: "500px"
+};
 const OurWork = () => {
 
     const [events, setEvents] = useState([]);
@@ -29,12 +36,14 @@ const OurWork = () => {
     }, []);
 
     return (
-        <div className="events-container" >
-            <h2>Our Events</h2>
-            <ul className ="event-list"  style={backgroundStyle}>
+        <div style={backgroundStyle} >
+            <h3>Our Events</h3>
+            <br/>
+            <ul className ="event-list"  >
                 {events.map(event=> (
 
-                   <li key={event.id} className="event" style={backgroundStyle}>
+                   <li key={event.id} className="event" style={backgroundImage}  >
+
                     <h5>{event.name_of_event}</h5>
                        <h6>Location: {event.location}</h6>
 
@@ -53,6 +62,7 @@ const OurWork = () => {
                             }}
                         > See Details </Link>
                </li>
+
                     ))}
 
 

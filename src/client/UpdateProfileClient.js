@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-
-
 import axios from 'axios';
-import {Col, FormGroup, Row} from "react-bootstrap";
+import {Col,  Row} from "react-bootstrap";
 import {Label} from "reactstrap";
 import * as API_USERS from "../planner/api/planner-api";
 import DatePicker from "react-datepicker";
@@ -55,7 +53,7 @@ export function UpdateProfileClient() {
     }
     useEffect(() => {
         const fetching = async () => {
-            const {data} = await axios.get('http://localhost:8080/unregistered/clientById', {
+            const {data} = await axios.get('http://localhost:8080/client/clientById', {
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }     })
@@ -76,7 +74,7 @@ export function UpdateProfileClient() {
                 alert("Successfully updated profile " + result);
                 window.location.reload(false);
             }
-            // reloadAfterUpdate();
+            reloadAfterUpdate();
         });
     }
 

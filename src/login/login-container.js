@@ -12,13 +12,14 @@ import {
 import Background from "../commons/images/background4.jpg";
 import ChangePassForm from "./components/change-pass-form";
 import {NotificationManager} from "react-notifications";
+import validate from "../commons/validators/validators";
 
 const backgroundStyle = {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     width: "100%",
-    height: "992px",
+    height: "940px",
     backgroundImage: `url(${Background})`,
 };
 
@@ -47,8 +48,7 @@ class LoginContainer extends React.Component {
                     valid: false,
                     touched: false,
                     validationRules: {
-                        minLength: 3,
-                        isRequired: true
+                        isRequired: true,
                     }
                 },
                 password: {
@@ -57,7 +57,7 @@ class LoginContainer extends React.Component {
                     valid: false,
                     touched: false,
                     validationRules: {
-                        isRequired: true
+                        isRequired: true,
                     }
                 },
                 selectedChangePass:false
@@ -79,12 +79,16 @@ class LoginContainer extends React.Component {
         const value = event.target.value;
         const updatedControls = this.state.formControls;
         const updatedFormElement = updatedControls[name];
-
         updatedFormElement.value = value;
+        updatedFormElement.touched = true;
+        updatedFormElement.valid = validate(value, updatedFormElement.validationRules);
         updatedControls[name] = updatedFormElement;
+
+        let formIsValid = true;
 
         this.setState({
             formControls: updatedControls,
+            formIsValid: formIsValid
         });
     };
 
@@ -114,7 +118,7 @@ class LoginContainer extends React.Component {
                 API_USERS_login.getRole(credentials.username, (result, status, error) => {
                     if (result !== null && (status === 200)) {
                         if (result === "Client") {
-                            window.location.href="/plannerCards";
+                            window.location.href="/ourWorkDashboard";
                             window.localStorage.setItem("role", result);
 
                         } else if (result === "Planner") {
@@ -169,20 +173,26 @@ class LoginContainer extends React.Component {
                                     <span className="symbol-input100">
 							            <i className="fa fa-user-circle-o" aria-hidden="true"/>
 						            </span>
+
+                                {this.state.formControls.username.touched && !this.state.formControls.username.valid &&
+                                <div className="error-message-register"> * Required </div>}
                             </div>
 
-                            <div className="wrap-input100 validate-input" data-validate="Password is required">
+                            <div className="wrap-input100 validate-input" >
                                 <input className="input100" type="password" name="password" placeholder="Password"  onChange={this.handleChange}/>
                                     <span className="focus-input100"/>
                                     <span className="symbol-input100">
 							            <i className="fa fa-lock" aria-hidden="true"/>
 						            </span>
+
+                                {this.state.formControls.password.touched && !this.state.formControls.password.valid  &&
+                                <div className={"error-message-register"}> * Required </div>}
                             </div>
 
                             <p className="error-message-login"  style={{display: this.state.showErrMsg ? 'block' : 'none' }}> ** User unauthorized </p>
 
                             <div className="container-login100-form-btn">
-                                <button type="button" className="login100-form-btn" onClick={this.handleSubmit}>
+                                <button type="button" className="login100-form-btn" onClick={this.handleSubmit} disabled={!this.state.formIsValid} >
                                     Login
                                 </button>
                             </div>
@@ -192,7 +202,7 @@ class LoginContainer extends React.Component {
                                     Forgot
                                 </span>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a type={"submit"} className="txt2" onClick={this.handleChangePass}>
+                                <a type={"submit"} className="txt2" onClick={this.handleChangePass} >
                                     Password?
                                 </a>
                             </div>

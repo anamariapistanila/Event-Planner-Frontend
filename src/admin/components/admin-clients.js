@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ImageTable from "../../home/table.jpg";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import * as API_USERS from "../../planner/api/planner-api";
 
 const backgroundStyle = {
     backgroundPosition: 'center',
@@ -24,14 +23,16 @@ function AdminClients() {
     const handleDelete = () => setShow(true);
     const handleClose = () => setShow(false);
     const [mainClients, setMainClients] = useState([]);
-    useEffect(() => {
-        axios.get('http://localhost:8080/admin/allClients').then(res => {
-            setClients(res.data);
-            setMainClients(res.data);
-            console.log(res.data);
-        }).catch(err => {
-            console.log(err);
-        })
+    useEffect(() => {  const fetching = async () => {
+        const {data} =await
+        axios.get('http://localhost:8080/admin/allClients',{ headers: {
+            'Authorization': localStorage.getItem('token')
+        }     })
+            setClients(data);
+            setMainClients(data);
+            console.log(data);
+    }
+    fetching();
     }, []);
 
 

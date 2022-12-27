@@ -3,7 +3,7 @@ import RestApiClient from '../../commons/api/rest-client'
 
 const endpoint = {
     planner: '/planner',
-    client: '/unregistered',
+    client: '/client',
     addEvent:'/addEventPlanner',
     deleteEvent: '/deleteEvent',
     updateEvent:'/updateEvent/',
@@ -40,24 +40,6 @@ function getClients(callback) {
     RestApiClient.performRequest(request, callback);
 }
 
-
-function postEvent(userEvent, callback){
-    let request = new Request(HOST.backend_api + endpoint.planner + endpoint.addEvent , {
-        method: 'POST',
-        headers : {
-            'Authorization': localStorage.getItem('token'),
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userEvent)
-
-    });
-
-    console.log(JSON.stringify(userEvent))
-    console.log("URL: " + request.url);
-
-    RestApiClient.performRequest(request, callback);
-}
 
 function deleteEventById(id,callback){
     let request = new Request(HOST.backend_api  +endpoint.planner +endpoint.deleteEvent +'/' + id, {
@@ -156,7 +138,6 @@ function addEventPlanner(userEvent, callback){
 
 export{
     getEvents,
-    postEvent,
     deleteEventById,
     updateEvent,
     getClients,

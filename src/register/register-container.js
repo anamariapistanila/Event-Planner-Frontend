@@ -258,7 +258,7 @@ class RegisterContainer extends React.Component {
         return API_USERS.postClient(userClient, (result, status, error) => {
             if (result !== null && (status === 200 || status === 201)) {
                 console.log("Successfully register new client " + result);
-                alert("Client added succesfully");
+                alert("Client added successfully");
                 window.location.href="/login";
 
 
@@ -348,7 +348,7 @@ class RegisterContainer extends React.Component {
 							    <i className="fa fa-user fa-lg" aria-hidden="true"/>
 						    </span>
 
-                            {this.state.formControls.name.touched && !this.state.formControls.name.valid &&
+                            {this.state.formControls.name.touched && !this.state.formControls.name.valid &&  !this.state.formIsValid &&
                             <div className="error-message-register"> * Name must have at least 5 characters </div>}
                         </FormGroup>
 
@@ -367,7 +367,7 @@ class RegisterContainer extends React.Component {
                             <span className="symbol-input">
 							    <i className="fa fa-user-circle-o fa-lg" aria-hidden="true"/>
 						    </span>
-                            {this.state.formControls.username.touched && !this.state.formControls.username.valid &&
+                            {this.state.formControls.username.touched && !this.state.formControls.username.valid &&  !this.state.formIsValid &&
                             <div className={"error-message-register"}> * Username must have at least 3 characters </div>}
                         </FormGroup>
 
@@ -385,7 +385,7 @@ class RegisterContainer extends React.Component {
                             <span className="symbol-input">
 							    <i className="fa fa-envelope fa-lg" aria-hidden="true"/>
 						    </span>
-                            {this.state.formControls.email.touched && !this.state.formControls.email.valid &&
+                            {this.state.formControls.email.touched && !this.state.formControls.email.valid && !this.state.formIsValid &&
                             <div className={"error-message-register"}> * Email must have a valid format</div>}
                         </FormGroup>
 
@@ -420,7 +420,7 @@ class RegisterContainer extends React.Component {
                             <span className="symbol-input">
 							    <i className="fa fa-mobile fa-2x" aria-hidden="true"/>
 						    </span>
-                            {this.state.formControls.phone.touched && !this.state.formControls.phone.valid &&
+                            {this.state.formControls.phone.touched && !this.state.formControls.phone.valid &&  !this.state.formIsValid &&
                             <div className={"error-message-register"}> * You must enter a valid number </div>}
                         </FormGroup>
 
@@ -439,7 +439,7 @@ class RegisterContainer extends React.Component {
                             <span className="symbol-input">
 							    <i className="fa fa-lock fa-lg" aria-hidden="true"/>
 						    </span>
-                            {this.state.formControls.password.touched && !this.state.formControls.password.valid &&
+                            {this.state.formControls.password.touched && !this.state.formControls.password.valid &&  !this.state.formIsValid &&
                             <div className={"error-message-register"}> * Password must have at least 6 characters </div>}
                         </FormGroup>
 
@@ -466,7 +466,7 @@ class RegisterContainer extends React.Component {
                     <br/>
                     <Row>
                         <Col sm={{size: '4', offset: 6}}>
-                            <Button type="button" style={vertical_center} onClick={this.handleSubmit} disabled={!this.state. formIsValid}> Submit </Button>
+                            <Button type="button" style={vertical_center} onClick={this.handleSubmit} disabled={!this.state.formIsValid}> Submit </Button>
                         </Col>
                     </Row>
                 </div>

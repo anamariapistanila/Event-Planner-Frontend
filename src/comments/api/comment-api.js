@@ -3,20 +3,11 @@ import RestApiClient from '../../commons/api/rest-client'
 
 const endpoint = {
     comment: '/comm',
-    addComment:'/addCommentClient',
-    getComm: '/getAllComments'
+    addComment:'/addCommentClient'
 
 };
 
 
-function getComments(callback) {
-    let request = new Request(HOST.backend_api + endpoint.comment + endpoint.getComm, {
-        method: 'GET',
-
-    });
-    console.log(request.url);
-    RestApiClient.performRequest(request, callback);
-}
 
 function addCommClient(comm, callback){
     let request = new Request(HOST.backend_api + endpoint.comment + endpoint.addComment , {
@@ -39,6 +30,5 @@ function addCommClient(comm, callback){
 
 
 export{
-    getComments,
     addCommClient
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Modal, ModalBody, ModalHeader, Row} from "reactstrap";
+import { Col, Row} from "reactstrap";
 import "../../commons/styles/planner.css"
 import "../../commons/styles/planner.css"
 import "../../commons/styles/Card.css"

@@ -12,6 +12,7 @@ import {
 import {withRouter} from "react-router-dom";
 import {IconButton} from "@material-ui/core";
 import tableIcons from "./MaterialTableIcons";
+import axios from "axios";
 
 const vertical_center = {
     background: 'white',
@@ -30,6 +31,7 @@ function NavigationBar(){
     const [notifications, setNotifications] = useState([]);
     const [newNotifications, setNewNotifications, newNotificationsRef] = useStateRef([]);
     const [iconClass, setIconClass] = useState('');
+    const [count, setCount, countRef] = useStateRef(0);
     const user = localStorage.getItem("UserId");
    function handleLogout()  {
         localStorage.clear();
@@ -76,18 +78,27 @@ function NavigationBar(){
     }
 
     const getNotifications = () => {
-        fetch("http://localhost:8080/notification/" + user, {})
-            .then(response => response.json())
-            .then(response => {
-                setNotifications(response);
-            })
-            .catch((error) => console.log(error))
-    }
+        if (user != null) {
+            const fetching = async () => {
+                const {data} = await axios.get("http://localhost:8080/notification/" + user);
 
+                setNotifications(data);
+                data.map((item) => {
+                    if (item.read === false) setCount(count + 1)
+                });
+            }
+            fetching();
+        } else {
+            console.log("");
+        }
+
+    }
     useEffect(() => {
+
         initListener();
         setIconClass("icon-dimmed");
         getNotifications();
+
     }, [])
 
     const initListener = () => {
@@ -109,15 +120,22 @@ function NavigationBar(){
     const handleServerEvent = (e) => {
         const json = JSON.parse(e.data);
         console.log(json);
-        let newNotifi = newNotificationsRef.current;
-        newNotifi.unshift({
+        let newNotifications = newNotificationsRef.current;
+        newNotifications .unshift({
             from: json.fromUser,
             message: json.message,
             isRead: false,
         });
-        console.log(newNotifi);
-        setNewNotifications(newNotifi);
-
+        console.log(newNotifications );
+        setNewNotifications(newNotifications );
+        if (newNotificationsRef.current.length > 1) {
+            setCount(1 + countRef.current);
+        } else {
+            setCount(newNotificationsRef.current.length + countRef.current);
+        }
+        if (count > 0) {
+            setIconClass("icon-active");
+        }
         notification.config({
             placement: "bottomLeft",
         });
@@ -134,9 +152,18 @@ function NavigationBar(){
         let notifi = notifications;
         notifi = newNotificationsRef.current.concat(notifi);
         setNewNotifications([]);
+        setCount(0);
         setNotifications(notifi.sort((a, b) => {
             return (new Date(b.createdAt) - new Date(a.createdAt))
         }));
+        fetch("http://localhost:8080/notification/" + user,
+            {
+                method: "PUT",
+                headers: {
+                    'Content-type': "application/json",
+                },
+            }
+        ).then(response => response.json())
 
     };
        return( <div>
@@ -164,7 +191,7 @@ function NavigationBar(){
 
 
                 <Button color="transparent" style={{vertical_center, float: 'right', marginRight: '15px', display: (localStorage.getItem("role") === ("Client")  || localStorage.getItem("role") === ("Planner")|| localStorage.getItem("role") === ("Admin") ) ? 'none':'block'}}
-                        onClick={handleDirections}> Directions </Button>
+                        onClick={handleDirections}> Our Location </Button>
 
 
 
@@ -182,7 +209,7 @@ function NavigationBar(){
                         onClick={handleUpdateProfile}> Update Profile</Button>
 
                 <Button color="transparent" style={{vertical_center, float: 'right', marginRight: '15px', display: localStorage.getItem("role") !== ("Client") ? 'none':'block'}}
-                        onClick={handlePlanner}> Our Planners </Button>
+                        onClick={handlePlanner}> Planners </Button>
 
 
                 <Button color="transparent" style={{vertical_center, float: 'right', marginRight: '15px', display:  localStorage.getItem("role") !== ("Client")  ? 'none':'block'}}
@@ -202,8 +229,9 @@ function NavigationBar(){
                                 dataSource={notifications}
                                 renderItem={(notification) => (
                                     <List.Item
-
+                                        className={notification.read ? "item-read" : "item-not-read"}
                                     >
+
                               <span style={{padding: "2px 20px"}}>
                                   {notification.createdAt.toLocaleString().substr(8, 2) + "/" +
                                   notification.createdAt.toLocaleString().substr(5, 2) + " " +
@@ -214,10 +242,16 @@ function NavigationBar(){
                             />
                         </div>}
                     >
-                        <IconButton style={{marginLeft: "-15px"}}>
+                        <Badge
+                            className="site-badge-count-109"
+                            style={{backgroundColor: "red", marginTop: "15px"}}
+                            offset={[-2, 10]}
+                            count={count}
+                        >
+                        <IconButton style={{vertical_center, float: 'right', marginRight: '15px', display: localStorage.getItem("role") !== ("Client") ? 'none':'block'}}>
                             <tableIcons.Notification/>
                         </IconButton>
-
+                        </Badge>
                     </Popover>
                 </a>
 

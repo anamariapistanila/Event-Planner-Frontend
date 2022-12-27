@@ -45,7 +45,7 @@ function PieChartEvents(){
 
         return withoutDuplicates;}
 
-function count(){
+    function count(){
         for (const num of locations) {
             counts[num] = counts[num] ? counts[num] + 1 : 1;
 
@@ -71,12 +71,22 @@ return number;
                     'rgba(99,125,255,0.2)',
                     'rgb(230,190,138)',
                     'rgba(212,100,237,0.7)',
+                    'rgba(100,237,189,0.7)',
+                    'rgb(141,138,230)',
+                    'rgb(255,215,0)',
+                    'rgb(255,7,234)',
+                    'rgba(255,255,255,0.16)',
 
                 ],
                 borderColor: [
                     'rgb(138,159,230)',
                     'rgb(230,190,138)',
                     'rgba(212,100,237,0.7)',
+                    'rgba(100,237,189,0.7)',
+                    'rgb(141,138,230)',
+                    'rgb(255,215,0)',
+                    'rgb(255,7,234)',
+                    'rgba(255,255,255,0.16)',
 
                 ],
                 borderWidth: 1,

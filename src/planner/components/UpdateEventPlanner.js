@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {Input, Label} from "reactstrap";
-import {Col, FormGroup, Row} from "react-bootstrap";
+import { Label} from "reactstrap";
+import {Col,  Row} from "react-bootstrap";
 
 import '../../commons/styles/events.css';
 

@@ -46,6 +46,7 @@ class ChangePassForm extends React.Component {
             error: null,
 
             formIsValid: false,
+            passIsValid: false,
 
             formControls: {
                 email: {
@@ -54,8 +55,7 @@ class ChangePassForm extends React.Component {
                     valid: false,
                     touched: false,
                     validationRules: {
-                        minLength: 3,
-                        isRequired: true
+                        emailValidator: true
                     }
                 },
                 username: {
@@ -64,7 +64,7 @@ class ChangePassForm extends React.Component {
                     valid: false,
                     touched: false,
                     validationRules: {
-                        minLength: 5,
+                        minLength: 3,
                         isRequired: true
                     }
                 },
@@ -138,11 +138,12 @@ class ChangePassForm extends React.Component {
         updatedFormElement.touched = true;
 
         let formIsValid = true;
-        formIsValid = this.state.formControls.password.value === value;
+        let passIsValid = true;
+        passIsValid = this.state.formControls.password.value === value;
 
         this.setState({
             formControls: updatedControls,
-            formIsValid: formIsValid
+            formIsValid: passIsValid
         });
 
     };
@@ -186,7 +187,7 @@ class ChangePassForm extends React.Component {
                     <span style={symbol_style}>
 							    <i className="fa fa-envelope fa-lg" aria-hidden="true"/>
 						    </span>
-                    {this.state.formControls.email.touched && !this.state.formControls.email.valid &&
+                    {this.state.formControls.email.touched && !this.state.formControls.email.valid && !this.state.formIsValid &&
                     <div className={"error-message-changepass"}> * Email must have a valid format</div>}
                 </FormGroup>
 
@@ -203,7 +204,7 @@ class ChangePassForm extends React.Component {
                     <span style={symbol_style}>
 							    <i className="fa fa-user-circle-o fa-lg" aria-hidden="true"/>
 						    </span>
-                    {this.state.formControls.username.touched && !this.state.formControls.username.valid &&
+                    {this.state.formControls.username.touched && !this.state.formControls.username.valid && !this.state.formIsValid &&
                     <div className={"error-message-changepass"}> * Username must have at least 3 characters </div>}
                 </FormGroup>
 
@@ -220,7 +221,7 @@ class ChangePassForm extends React.Component {
                     <span style={symbol_style}>
 							    <i className="fa fa-lock fa-lg" aria-hidden="true"/>
 						    </span>
-                    {this.state.formControls.password.touched && !this.state.formControls.password.valid &&
+                    {this.state.formControls.password.touched && !this.state.formControls.password.valid && !this.state.formIsValid &&
                     <div className={"error-message-changepass"}> * Password must have at least 6 characters </div>}
                 </FormGroup>
                 <FormGroup id='confirmpass'>
@@ -236,7 +237,7 @@ class ChangePassForm extends React.Component {
                     <span style={symbol_style}>
 							    <i className="fa fa-lock fa-lg" aria-hidden="true"/>
 						    </span>
-                    {this.state.formControls.confirmpass.touched && !this.state.formIsValid &&
+                    {this.state.formControls.confirmpass.touched && !this.state.formIsValid && !this.state.passIsValid &&
                     <div className={"error-message-changepass"}> * Passwords must match </div>}
                 </FormGroup>
 

@@ -32,13 +32,15 @@ function EventsTablePlanner() {
                     'Authorization': localStorage.getItem('token')
                 }     })
             setEvents(data);
+
             setMainEvents(data);
             console.log(data);
     }
     fetching();
 
 }, []);
-
+    {events.map(u =>
+        console.log(u.id))}
 
     const handleSearch = (e) => {
         setEvents(mainEvents.filter(u => u.location.toLowerCase()
@@ -110,7 +112,8 @@ function EventsTablePlanner() {
                     </thead>
                     <tbody>
                     {events.map(u =>
-                        <tr key={u.id}>
+                        <tr key={u.id} >
+
 
                             <th scope="row">{u.name_of_client}</th>
 
@@ -128,7 +131,7 @@ function EventsTablePlanner() {
                                    </Modal.Header>
                                    <Modal.Body>Are you sure you want to delete?</Modal.Body>
                                    <Modal.Footer>
-                                       <Button variant="secondary" onClick={()=>deleteEvent(u.id)}>
+                                       <Button variant="secondary" onClick={()=>deleteEvent(u.id) }>
                                           Yes
                                        </Button>
                                        <Button variant="primary" onClick={handleClose}>

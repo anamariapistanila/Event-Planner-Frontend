@@ -1,9 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-
-import { useLocation, Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import React from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import {Input, Label} from "reactstrap";
+import { Label} from "reactstrap";
 import {Col, FormGroup, Row} from "react-bootstrap";
 import * as API_DETAILS from "../../planner/api/details-api";
 

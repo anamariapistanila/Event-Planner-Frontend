@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-
 import { useLocation} from "react-router-dom";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import { Label} from "reactstrap";
-import {Col, FormGroup, Row} from "react-bootstrap";
+import {Col,  Row} from "react-bootstrap";
 import * as API_CLIENT from "./api/client-api";
 import moment from "moment";
 import Background from "../commons/images/background4.jpg";
@@ -30,6 +28,7 @@ function CreateYourEvent() {
     const [formValues, setFormValues] = useState(initialValues);
     const [isSubmit, setIsSubmit] = useState(false);
     const [formErrors, setFormErrors] = useState({});
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
@@ -69,7 +68,7 @@ function CreateYourEvent() {
     const [events, setEvents] = useState([]);
     useEffect(() => {
         const fetching = async () => {
-            const {data} = await axios.get('http://localhost:8080/unregistered/allEvents', {
+            const {data} = await axios.get('http://localhost:8080/client/allEvents', {
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }     })
@@ -123,7 +122,9 @@ function CreateYourEvent() {
             id_planner: localStorage.getItem("plannerId")
 
         };
+if(startDate.getDate()<10){
 
+}
        let client_plannerDTO = {
            id_client: localStorage.getItem("UserId"),
            id_planner: localStorage.getItem("plannerId")
@@ -179,19 +180,23 @@ return (
                         </div>
 
                         <div className="field" style={{width: '600px'}}>
-                        <style>
-                            {`.date-picker input {
+
+                        <Label> Event Date: </Label>
+                            <style>
+                                {`.date-picker input {
                              width: 100%,
                              color:red
                              
                          }`}
-                        </style>
-                        <Label> Event Date: </Label>
+                            </style>
                         <DatePicker  minDate={moment().toDate()}
                                      showMonthDropdown
                                      showYearDropdown
-                                     dropdownMode="select" selected={startDate}  onChange={ (date:Date) => events!=null ? (events.map((e)=>{
-                            (date.getDate().valueOf()==e.date.substring(0,2) && date.getMonth().valueOf()+1 ==e.date.substring(3,4) && date.getFullYear().valueOf()==e.date.substring(5,9))  ? alert("This date is already taken") :  setStartDate(date)}))  : setStartDate(date)} />
+                                     dropdownMode="select" selected={startDate}  onChange={ (date:Date) => events.length!=0 ? (events.map((e)=>{
+                            ( (date.getDate().valueOf()==e.date.substring(0,1) && date.getMonth().valueOf()+1 ==e.date.substring(2,3) && date.getFullYear().valueOf()==e.date.substring(4,8)) ||
+                            (date.getDate().valueOf()==e.date.substring(0,2) && date.getMonth().valueOf()+1 ==e.date.substring(3,4) && date.getFullYear().valueOf()==e.date.substring(5,9)) ||
+                                (date.getDate().valueOf()==e.date.substring(0,1) && date.getMonth().valueOf()+1 ==e.date.substring(2,4) && date.getFullYear().valueOf()==e.date.substring(5,9)) ||
+                                (date.getDate().valueOf()==e.date.substring(0,2) && date.getMonth().valueOf()+1 ==e.date.substring(3,5) && date.getFullYear().valueOf()==e.date.substring(6,10)) )   ? alert("This date is already taken") : setStartDate(date)  }))  : setStartDate(date)} />
 
                     </div>
 

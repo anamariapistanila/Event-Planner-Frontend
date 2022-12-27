@@ -26,7 +26,7 @@ function PlannersCards() {
 
     useEffect(() => {
         const fetching = async () => {
-            const {data} = await axios.get('http://localhost:8080/unregistered/allPlannersDetails', {
+            const {data} = await axios.get('http://localhost:8080/client/allPlannersDetails', {
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }     })
@@ -51,7 +51,7 @@ function PlannersCards() {
                     <div  key={e.id} >
 
 
-                        <Col sm={{size: '4', offset: 5}}
+                        <Col sm={{size: '2', offset: 10}}
                         >
                             <div className="CardClient">
                                 <div className="upper-container">
@@ -65,7 +65,7 @@ function PlannersCards() {
                                     <h2>{e.name}</h2>
                                     <h5>{e.type_of_planner}</h5>
                                     <h6>{e.description} </h6>
-
+                                <br/>
                                     <Link className="txt2"
                                         to={{
                                             pathname: "/createYourEvent/?id=" + e.id,

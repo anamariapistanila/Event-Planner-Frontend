@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Label} from "reactstrap";
-import {Col, FormGroup, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import * as API_CLIENT from "../../client/api/client-api";
 import '../../commons/styles/events.css';
 import {storage} from "../../firebase/firebase"
@@ -15,7 +15,7 @@ const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     width: "100%",
-    height: "992px",
+    height: "1000px",
     backgroundImage: `url(${Background})`,
 };
 
@@ -153,13 +153,13 @@ function AddWorkEvent() {
 
                     </div>
 
-                    <br/> <br/>
+                    <br/>
                         <div className="field" style={{width: '400px'}}>
                     <input type="file"  id= "image_path" onChange={handleChange} />
                         <button type="button" onClick={handleUpload}>Upload</button>
                         <img src={url || "http://via.placeholder.com/300"} className="photo" alt="firebase-image" />
                     </div>
-                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                       <br/>
 
                     <Row className="container-login100-form-btn">
                         <Col xs lg="4">

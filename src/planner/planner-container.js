@@ -1,11 +1,13 @@
 import React from "react";
-import { Col, Modal, ModalBody, ModalHeader, Row} from "reactstrap";
+import { Col, Row} from "reactstrap";
 import "../commons/styles/planner.css"
 import "../commons/styles/planner.css"
 import "../commons/styles/Card.css"
 import BackgroundImg from "../commons/images/events.jpg"
 import ClientsImg from "../commons/images/clients.jpg"
 import Background from "../commons/images/background4.jpg";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 const backgroundStyle = {
     backgroundPosition: 'center',
@@ -28,6 +30,7 @@ class PlannerContainer extends React.Component {
         super(props);
 
         this.state = {
+            profile: true,
             selected: false,
             selectedFind: false,
             selectedAddCaregiver: false,
@@ -41,14 +44,24 @@ class PlannerContainer extends React.Component {
             markDisPerson: false,
         };
     }
+  onClose() {
+      this.setState(({
+        profile: false,
+      }));
 
+  }
 
     render() {
         return (
 
             <div style={backgroundStyle}>
                 <h5 className="display-3" style={textStyle}>Manage events</h5>
-
+                {/*{this.state.profile &&*/}
+                {/*<Alert severity="info"  style={{width: '20%', height: '10%'}} onClose={()=>{this.onClose()}}>*/}
+                {/*    <AlertTitle>Info</AlertTitle>*/}
+                {/*    <strong>Please update your profile</strong>*/}
+                {/*</Alert>*/}
+                {/*}*/}
 
                 <br/><br/>   <br/><br/>   <br/><br/>
             <Row >

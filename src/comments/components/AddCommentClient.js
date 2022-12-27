@@ -1,12 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useState} from 'react';
 
-import { useLocation, Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import { useLocation} from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
-import {Input, Label} from "reactstrap";
+import { Label} from "reactstrap";
 import {Col, FormGroup, Row} from "react-bootstrap";
 import * as API_COMM from "../api/comment-api";
-import moment from "moment";
 import Background from "../../commons/images/background4.jpg";
 
 const backgroundStyle = {
@@ -21,7 +19,8 @@ const backgroundStyle = {
 function AddCommentClient() {
 
 
-    const [startDate, setStartDate] = useState(new Date());
+    const today = new Date(),
+        date = today.getDate() +'/' +(today.getMonth() + 1) +'/' +today.getFullYear();
 
     const {state} =useLocation();
     const id=state.events.id;
@@ -38,7 +37,7 @@ function AddCommentClient() {
     }
     function reloadAfterAdd(){
 
-            window.location.href="/plannerCards";
+            window.location.href="/ourWorkDashboard";
 
 
     }
@@ -47,7 +46,7 @@ function AddCommentClient() {
 
         let commentDTO = {
             comment: document.getElementById("comment").value,
-            date: startDate.getDate() + "/" + (startDate.getMonth()+1) + "/"+startDate.getFullYear(),
+            date: document.getElementById("date").value,
             id_client: localStorage.getItem("UserId"),
             id_event:id
         };
@@ -88,13 +87,20 @@ function AddCommentClient() {
                              
                          }`}
                         </style>
-                        <Label> Comment Date: </Label>
-                        <DatePicker  minDate={moment().toDate()} showMonthDropdown
-                                     showYearDropdown
-                                     dropdownMode="select" selected={startDate}  onChange={ (date:Date) =>  setStartDate(date)} wrapperClassName="date-picker"/>
+                        <Label> Date: </Label>
+                        <div className="field" style={{width: '400px'}}>
+                            <input className="input100"  defaultValue={date}
+                                   placeholder="Date"
+                                   type="text"
+                                   name="date"
+                                   id="date"
+
+                            />
+                            <span className="symbol-input">
+                             <i className="fa fa-calendar" aria-hidden="true"/>
+                          </span>
+                        </div>
                     </div>
-
-
                     <br/>   <br/>    <br/>
                     <br/>
                     <Row className="container-login100-form-btn">

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 
 import axios from 'axios';
-import {Col, FormGroup, Row} from "react-bootstrap";
+import {Col,FormGroup,  Row} from "react-bootstrap";
 import {Label} from "reactstrap";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../firebase/firebase";
@@ -199,18 +199,15 @@ export function UpdateProfilePlanner() {
                     <select className="input100" id="type" name="type" value={formValues.type}
                             onChange={handleChangeValid}>
                         <option value="0">Choose type...</option>
-                        <option value="wedding">Wedding Planner</option>
-                        <option value="baptism">Baptism Planner</option>
-                        <option value="anniversary">Anniversary Planner</option>
+                        <option value="Wedding planner">Wedding Planner</option>
+                        <option value="Baptism planner">Baptism Planner</option>
+                        <option value="Anniversary planner">Anniversary Planner</option>
                     </select>
                     <span className="symbol-input" >
 							 <i className="fa fa-list-ol"  aria-hidden="true"/>
 						    </span>
 
                 </div>
-
-
-                    <br/>
 
                 < p>{formErrors.description}</p>
 
@@ -222,14 +219,15 @@ export function UpdateProfilePlanner() {
 
                 </div>
 
-                <br/><br/>
+                <br/>
 
                     <div className="field" style={{width: '400px'}}>
                     <input type="file"  id= "image_path" onChange={handleChange} />
-                    <button onClick={handleUpload}>Upload</button>
+                    <button type="button"  onClick={handleUpload}>Upload</button>
                     <img src={url || "http://via.placeholder.com/300"} className="photo" alt="Image uploaded" />
-                </div>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </div>
+
+
 
                 <Row className="container-login100-form-btn">
                     <Col xs lg="4">

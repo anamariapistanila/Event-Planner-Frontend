@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import { useLocation } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { Label} from "reactstrap";
 import {Col, FormGroup, Row} from "react-bootstrap";
-import * as API_USERS from "../../planner/api/planner-api";
-
 import Background from "../../commons/images/background4.jpg";
-import axios from "axios";
 import * as API_ADMIN from "../api/admin-api";
 
 const backgroundStyle = {
@@ -42,6 +39,7 @@ const {state} = useLocation();
             name: document.getElementById("namePlanner").value,
             email: document.getElementById("emailPlanner").value,
             phone:document.getElementById("phonePlanner").value,
+            type_of_planner: state.planners.type_of_planner
 
 
         };

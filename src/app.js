@@ -33,7 +33,6 @@ import AdminClients from "./admin/components/admin-clients";
 import AdminPage from "./admin/components/admin-page";
 import AdminPlanners from "./admin/components/admin-planners";
 import UpdatePlannerAdmin from "./admin/components/UpdatePlannerAdmin";
-import {PieChart} from "@mui/icons-material";
 import PieChartEvents from "./chart/PieChartEvents";
 
 

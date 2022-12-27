@@ -9,17 +9,6 @@ const endpoint = {
 };
 
 
-function getEvents(callback) {
-    let request = new Request(HOST.backend_api + endpoint.planner + endpoint.getEvents, {
-        method: 'GET',
-        headers : {
-            'Authorization': 'Bearer ' + window.localStorage.getItem("token")
-        }
-    });
-    console.log(request.url);
-    RestApiClient.performRequest(request, callback);
-}
-
 
 function addDetailsEv(details, callback){
     let request = new Request(HOST.backend_api + endpoint.details + endpoint.addDetails, {
